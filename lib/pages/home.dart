@@ -112,6 +112,36 @@ class _HomeState extends State<Home> {
                     fontWeight: FontWeight.bold),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.only(right: 20.0, left: 20.0),
+              child: Row(
+                children: [
+                  Container(
+                    width: 150,
+                    padding: EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(color: Colors.white),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          "assets/photos/place.png",
+                          width: 90,
+                          height: 90,
+                          fit: BoxFit.cover,
+                        ),
+                        SizedBox(height: 20.0),
+                        Text(
+                          "Place",
+                          style: TextStyle(
+                              fontSize: 22.0,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            )
           ],
         ),
       ),
