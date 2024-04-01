@@ -140,7 +140,7 @@ class _HomeState extends State<Home> {
                               height: 90,
                               fit: BoxFit.cover,
                             ),
-                            SizedBox(height: 15.0),
+                            SizedBox(height: 10.0),
                             Text(
                               "Place",
                               style: TextStyle(
@@ -170,7 +170,7 @@ class _HomeState extends State<Home> {
                               height: 90,
                               fit: BoxFit.cover,
                             ),
-                            SizedBox(height: 15.0),
+                            SizedBox(height: 10.0),
                             Text(
                               "Brids",
                               style: TextStyle(
@@ -211,7 +211,7 @@ class _HomeState extends State<Home> {
                               height: 90,
                               fit: BoxFit.cover,
                             ),
-                            SizedBox(height: 15.0),
+                            SizedBox(height: 10.0),
                             Text(
                               "Fruits",
                               style: TextStyle(
@@ -241,9 +241,9 @@ class _HomeState extends State<Home> {
                               height: 90,
                               fit: BoxFit.cover,
                             ),
-                            SizedBox(height: 15.0),
+                            SizedBox(height: 10.0),
                             Text(
-                              "Brids",
+                              "Objects",
                               style: TextStyle(
                                   fontSize: 22.0,
                                   color: Colors.black,
@@ -282,7 +282,7 @@ class _HomeState extends State<Home> {
                               height: 90,
                               fit: BoxFit.cover,
                             ),
-                            SizedBox(height: 15.0),
+                            SizedBox(height: 10.0),
                             Text(
                               "Sports",
                               style: TextStyle(
@@ -312,7 +312,7 @@ class _HomeState extends State<Home> {
                               height: 90,
                               fit: BoxFit.cover,
                             ),
-                            SizedBox(height: 15.0),
+                            SizedBox(height: 10.0),
                             Text(
                               "Random",
                               style: TextStyle(
