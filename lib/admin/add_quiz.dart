@@ -10,6 +10,12 @@ class AddQuiz extends StatefulWidget {
 class _AddQuizState extends State<AddQuiz> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: Container(
+        child: Column(
+          children: [],
+        ),
+      ),
+    );
   }
 }
