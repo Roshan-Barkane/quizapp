@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddQuiz extends StatefulWidget {
   const AddQuiz({super.key});
@@ -8,6 +11,14 @@ class AddQuiz extends StatefulWidget {
 }
 
 class _AddQuizState extends State<AddQuiz> {
+  final ImagePicker _picker = ImagePicker();
+  File? selectedImage;
+  Future getImage() async {
+    var image = await _picker.pickImage(source: ImageSource.gallery);
+    selectedImage = File(image!.path);
+    setState(() {});
+  }
+
   String? value;
   final List<String> quizitems = [
     'Animal',
@@ -50,25 +61,48 @@ class _AddQuizState extends State<AddQuiz> {
               SizedBox(
                 height: 20.0,
               ),
-              Center(
-                child: Material(
-                  elevation: 4.0,
-                  borderRadius: BorderRadius.circular(20.0),
-                  child: Container(
-                    width: 150,
-                    height: 150,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black, width: 1.5),
-                      borderRadius: BorderRadius.circular(20.0),
+              selectedImage == null
+                  ? GestureDetector(
+                      onTap: () => getImage(),
+                      child: Center(
+                        child: Material(
+                          elevation: 4.0,
+                          borderRadius: BorderRadius.circular(20.0),
+                          child: Container(
+                            width: 150,
+                            height: 150,
+                            decoration: BoxDecoration(
+                              border:
+                                  Border.all(color: Colors.black, width: 1.5),
+                              borderRadius: BorderRadius.circular(20.0),
+                            ),
+                            child: Icon(
+                              Icons.camera_alt_outlined,
+                              color: Colors.black,
+                              size: 40,
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  : Center(
+                      child: Material(
+                        elevation: 4.0,
+                        borderRadius: BorderRadius.circular(20.0),
+                        child: Container(
+                          width: 150,
+                          height: 150,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black, width: 1.5),
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          child: Image.file(
+                            selectedImage!,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
                     ),
-                    child: Icon(
-                      Icons.camera_alt_outlined,
-                      color: Colors.black,
-                      size: 40,
-                    ),
-                  ),
-                ),
-              ),
               SizedBox(height: 20.0),
               Text(
                 "Option 1",
