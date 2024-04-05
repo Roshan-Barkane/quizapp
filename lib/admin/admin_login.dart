@@ -124,21 +124,26 @@ class _AdminLoginState extends State<AdminLogin> {
                             SizedBox(
                               height: 30.0,
                             ),
-                            Container(
-                              padding: EdgeInsets.symmetric(vertical: 12.0),
-                              margin: EdgeInsets.symmetric(horizontal: 20.0),
-                              width: MediaQuery.of(context).size.width,
-                              decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "Login",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 21.0,
-                                      fontWeight: FontWeight.bold),
+                            GestureDetector(
+                              onTap: () {
+                                loginAdmin();
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(vertical: 12.0),
+                                margin: EdgeInsets.symmetric(horizontal: 20.0),
+                                width: MediaQuery.of(context).size.width,
+                                decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    "Login",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 21.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ),
                               ),
                             )
