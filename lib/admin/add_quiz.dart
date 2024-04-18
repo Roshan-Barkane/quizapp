@@ -1,7 +1,11 @@
 import 'dart:io';
 
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:quizapp/service/database.dart';
+import 'package:random_string/random_string.dart';
 
 class AddQuiz extends StatefulWidget {
   const AddQuiz({super.key});
@@ -13,6 +17,7 @@ class AddQuiz extends StatefulWidget {
 class _AddQuizState extends State<AddQuiz> {
   final ImagePicker _picker = ImagePicker();
   File? selectedImage;
+  // this function take the image in local saved image files
   Future getImage() async {
     var image = await _picker.pickImage(source: ImageSource.gallery);
     selectedImage = File(image!.path);
@@ -34,6 +39,45 @@ class _AddQuizState extends State<AddQuiz> {
   TextEditingController option3Controller = new TextEditingController();
   TextEditingController option4Controller = new TextEditingController();
   TextEditingController currentOptionController = new TextEditingController();
+  // this function stored the date in firebase
+  uploadItem() async {
+    if (selectedImage != null &&
+        option1Controller.text != "" &&
+        option2Controller.text != "" &&
+        option3Controller.text != "" &&
+        option4Controller.text != "" &&
+        currentOptionController.text != "") {
+      String addId = randomAlphaNumeric(10);
+      Reference firebaseStorageRef =
+          FirebaseStorage.instance.ref().child("blogImage").child(addId);
+      final UploadTask task = firebaseStorageRef.putFile(selectedImage!);
+
+      var downloadUrl = await (await task).ref.getDownloadURL();
+
+      Map<String, dynamic> addQuiz = {
+        "Image": downloadUrl,
+        "Option1": option1Controller.text,
+        "Option2": option2Controller.text,
+        "Option3": option3Controller.text,
+        "Option4": option4Controller.text,
+        "Current": currentOptionController,
+      };
+      await DatabaseMathods().addQuizCategory(addQuiz, value!).then(
+        (value) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: Colors.orangeAccent,
+              content: Text(
+                "Quiz has been added Successfully",
+                style: TextStyle(fontSize: 18.0),
+              ),
+            ),
+          );
+        },
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -287,24 +331,29 @@ class _AddQuizState extends State<AddQuiz> {
               SizedBox(
                 height: 20.0,
               ),
-              Center(
-                child: Material(
-                  elevation: 5.0,
-                  borderRadius: BorderRadius.circular(10),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 10.0),
-                    width: 150,
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    child: Center(
-                      child: Text(
-                        "Add",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 22.0),
+              GestureDetector(
+                onTap: () {
+                  uploadItem();
+                },
+                child: Center(
+                  child: Material(
+                    elevation: 5.0,
+                    borderRadius: BorderRadius.circular(10),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 10.0),
+                      width: 150,
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Add",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 22.0),
+                        ),
                       ),
                     ),
                   ),
